@@ -216,7 +216,7 @@ def find_salary_expectation(job, job_seeker_data: dict) -> float:
     hunter_max = job.get("salary_max", 0)
     hunter_avg = (hunter_min + hunter_max) / 2 if hunter_min and hunter_max else max(hunter_min, hunter_max)
 
-    return max(100, hunter_avg / seeker_expectation) if seeker_expectation else 0
+    return min(100, hunter_avg / seeker_expectation * 100) if seeker_expectation else 0
 
 def match_location(job, job_seeker_data: dict) -> float:
     """Simple location match scoring"""
@@ -289,4 +289,5 @@ def create_job_comparison_radar(matched_job: dict, job: dict, job_seeker_data: d
         
     except Exception as e:
         st.error(f"Error creating radar chart: {str(e)}")
+
 
