@@ -221,7 +221,7 @@ def find_salary_expectation(job, job_seeker_data: dict) -> float:
 def match_location(job, job_seeker_data: dict) -> float:
     """Simple location match scoring"""
     job_location = job.get("location", "").lower()
-    seeker_location = job_seeker_data.get("preferred_location", "").lower()
+    seeker_location = job_seeker_data.get("location_preference", "Hong Kong").lower()
     if not job_location or not seeker_location:
         return 0.0
     return 100.0 if seeker_location in job_location or seeker_location == "Hong Kong" and job_location in ["HK", "Hong Kong"] else 30.0
@@ -289,3 +289,4 @@ def create_job_comparison_radar(matched_job: dict, job: dict, job_seeker_data: d
         
     except Exception as e:
         st.error(f"Error creating radar chart: {str(e)}")
+
